@@ -13,7 +13,7 @@ import cloudinary.uploader
 
 from plate_tracker import PlateTracker
 
-API_URL = "http://127.0.0.1:3000/api/plates"
+API_URL = "https://teafffic-maangement-app.onrender.com/api/plates"
 
 cloudinary.config(
   cloud_name = "dozg3fcta",
@@ -72,9 +72,7 @@ license_plate_detector = YOLO('./models/license_plate_detector.pt')
 video_path = 'Recording 2026-08-30 112842.mp4'
 cap = cv2.VideoCapture(video_path)
 
-# Create resizable live video window
-cv2.namedWindow('Traffic Violation Detection - Live', cv2.WINDOW_NORMAL)
-cv2.resizeWindow('Traffic Violation Detection - Live', 1024, 768)
+# Headless mode for deployment: GUI windows removed
 
 vehicles = [2, 3, 5, 7]
 
@@ -243,16 +241,12 @@ while ret:
                                     cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 255, 255), 2)
                         print(f"Frame {frame_nmr} | Vehicle #{int(car_id)} | Plate (Best): {best_text} (Score: {best_score:.2f})", flush=True)
 
-        # Render live frame window
-        cv2.imshow('Traffic Violation Detection - Live', frame)
+        # Render live frame window removed for headless deployment
 
-        # Press 'q' to stop live stream
-        if cv2.waitKey(1) & 0xFF == ord('q'):
-            print("Live stream stopped by user.", flush=True)
-            break
+        # (No cv2.waitKey needed in headless mode, runs until video ends)
 
 cap.release()
-cv2.destroyAllWindows()
+# cv2.destroyAllWindows() removed for headless deployment
 
 tracker.finalize_all()
 # write results to CSV

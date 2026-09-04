@@ -42,6 +42,18 @@ Base.metadata.create_all(bind=engine)
 
 app = FastAPI(title="ANPR Plate Ingest API")
 
+import subprocess
+
+@app.get("/")
+def read_root():
+    return {"status": "online", "message": "Traffic violation backend is running. Use /start-video to trigger video processing."}
+
+@app.get("/start-video")
+def start_video():
+    # Launch main.py in the background
+    subprocess.Popen(["python", "main.py"])
+    return {"status": "started", "message": "Video processing started in the background. It will send violations to your Next.js app!"}
+
 
 class PlateIn(BaseModel):
     car_id: int
