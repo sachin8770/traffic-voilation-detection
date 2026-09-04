@@ -4,3 +4,6 @@ libsm6
 libxrender1
 libxext6
 libxcb1
+libxcb-xinerama0
+libxcb-cursor0
+libxkbcommon-x11-0
