@@ -13,3 +13,6 @@ easyocr>=1.7.0
 filterpy>=1.4.5
 scikit-image>=0.17.0
 lapx>=0.5.5
+sqlalchemy>=2.0.0
+requests>=2.28.0
+cloudinary>=1.36.0
